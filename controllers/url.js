@@ -1,16 +1,17 @@
 import shortid from "shortid";
 import Url from "../models/Url.js";
+import dotenv from "dotenv";
+dotenv.config()
 
 /** REGISTER USER */
 export const createShort =  async (req, res) => {
 
     const { origUrl, userId } = req.body;
-    const base = `http://localhost:3001`;
   
     const urlId = shortid.generate();
     if (validateUrl(origUrl)) {
       try {
-          const shortUrl = `${base}/${urlId}`;
+          const shortUrl = `${process.env.DOMAIN_URL}/${urlId}`;
   
           const url = new Url({
             userId,
